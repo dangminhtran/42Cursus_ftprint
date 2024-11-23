@@ -1,12 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dangtran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/20 21:22:56 by dangtran          #+#    #+#             */
+/*   Updated: 2024/11/20 21:42:40 by dangtran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
 # include <unistd.h>
 
 size_t	ft_putchar_fd(char c, int fd);
-size_t	ft_putstr_fd(char *s, int fd);
-size_t	ft_putnbr_fd(int n, int fd);
-void	ft_put_hex_lower(unsigned int nbr);
-void	ft_put_hex_upper(unsigned int nbr)
+void	ft_putnbr_fd(int n, int fd);
 
-#endif 
+#endif

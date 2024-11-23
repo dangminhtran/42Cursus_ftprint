@@ -1,26 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/20 21:28:12 by dangtran          #+#    #+#             */
+/*   Updated: 2024/11/23 16:59:13 by dangtran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-size_t	ft_nbr_len(unsigned int nbr)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t	len;
+	long	nbr;
 
-	len = 0;
-	while (nbr != 0)
+	nbr = n;
+	if (n < 0)
 	{
-		nbr /= 10;
-		len++;
+		ft_putchar_fd('-', fd);
+		nbr *= -1;
 	}
-	return (len);
-}
-
-size_t	ft_putnbr_fd(int n, int fd)
-{
-	size_t	len;
-	char	*nbr;
-
-// creer le ft_itoa
-	nbr = ft_itoa(n);
-	len = ft_putstr_fd(nbr, fd);
-	free(nbr);
-	return (len);
+	if (nbr / 10 != 0)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd(nbr % 10 + '0', fd);
 }
