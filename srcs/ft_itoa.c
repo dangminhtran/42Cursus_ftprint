@@ -6,13 +6,13 @@
 /*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:49:53 by dangtran          #+#    #+#             */
-/*   Updated: 2024/11/23 16:53:10 by dangtran         ###   ########.fr       */
+/*   Updated: 2024/11/30 15:00:19 by dangtran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
-static size_t	ft_digitlen(long n)
+size_t	ft_digitlen(long n)
 {
 	size_t	len;
 

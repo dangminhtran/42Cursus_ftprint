@@ -6,24 +6,24 @@
 /*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:08:21 by dangtran          #+#    #+#             */
-/*   Updated: 2024/11/23 17:00:30 by dangtran         ###   ########.fr       */
+/*   Updated: 2024/11/25 20:49:41 by dangtran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
-size_t	ft_format(va_list args, char c, size_t *len)
+void	ft_format(va_list args, char c, size_t *len)
 {
 	if (c == 'c')
 		*len += ft_putchar_fd(va_arg(args, int), 1);
 	else if (c == 's')
-		*len += ft_putfd(va_arg(args, char *), 1);
+		*len += ft_putstr_fd(va_arg(args, char *), 1);
 	else if (c == 'd' || c == 'i')
 		*len += ft_putnbr_fd(va_arg(args, int), 1);
 	else if (c == 'u')
 		*len += ft_put_unsigned(va_arg(args, unsigned int));
 	else if (c == 'p')
-		*len = 0;
+		*len += ft_ptr_hex(va_arg(args, unsigned long));
 	else if (c == 'x')
 		*len += ft_put_hex_lower(va_arg(args, unsigned int));
 	else if (c == 'X')
@@ -60,3 +60,14 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	long ptr = "Salut";
+// 	// ft_printf("Hello");
+// 	// printf("Hello");
+// 	printf("%d\n", printf("%p", ptr));
+// 	printf("%d", ft_printf("%p", ptr));
+// 	return (0);
+// }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dangtran <dangtran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 21:28:12 by dangtran          #+#    #+#             */
-/*   Updated: 2024/11/30 15:00:50 by dangtran         ###   ########.fr       */
+/*   Created: 2024/11/23 16:49:53 by dangtran          #+#    #+#             */
+/*   Updated: 2024/11/27 11:21:11 by dangtran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t	ft_len(unsigned int n)
+size_t	ft_udigitlen(long n)
 {
 	size_t	len;
 
-	len = 0;
-	while (n != 0)
+	len = 1;
+	if (n < 0)
+	{
+		n *= -1;
+		len++;
+	}
+	while (n >= 10)
 	{
 		n /= 10;
 		len++;
@@ -25,13 +30,31 @@ size_t	ft_len(unsigned int n)
 	return (len);
 }
 
-size_t	ft_putnbr_fd(int n, int fd)
+char	*ft_uitoa(unsigned int n)
 {
-	char	*nbr;
-	size_t	len;
+	long	nbr;
+	size_t	i;
+	size_t	n_len;
+	char	*str;
 
-	nbr = ft_itoa(n);
-	len = ft_putstr_fd(nbr, fd);
-	free(nbr);
-	return (len);
+	nbr = (long)n;
+	n_len = ft_udigitlen(nbr);
+	str = (char *)malloc(sizeof(char) * (n_len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	if (n == 0)
+		str[i] = '0';
+	if (nbr < 0)
+	{
+		str[0] = '-';
+		nbr *= -1;
+	}
+	while (nbr > 0)
+	{
+		str[(n_len - 1) - i++] = (nbr % 10) + '0';
+		nbr /= 10;
+	}
+	str[n_len] = 0;
+	return (str);
 }
